@@ -85,19 +85,19 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 			}
 
 			// Add main page
-			$admin_page = add_menu_page( __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'General Settings', 'wordpress-seo' ), __( 'SEO', 'wordpress-seo' ), 'manage_options', 'wpseo_dashboard', array( $this, 'load_page' ), plugins_url( 'images/yoast-icon.png', WPSEO_FILE ), '99.31337' );
+			$admin_page = add_menu_page( __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'General Settings', 'wordpress-seo' ), __( 'SEO', 'wordpress-seo' ), 'manage_options', 'wpseo_dashboard', array( $this, 'load_page' ), plugins_url( 'images/yoast-icon.png', WPSEO_FILE ), '99.31337' );
 
 			// Sub menu pages
 			$submenu_pages = array(
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Titles &amp; Metas', 'wordpress-seo' ), __( 'Titles &amp; Metas', 'wordpress-seo' ), 'manage_options', 'wpseo_titles', array( $this, 'load_page' ), array( array( $this, 'title_metas_help_tab' ) ) ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Social', 'wordpress-seo' ), __( 'Social', 'wordpress-seo' ), 'manage_options', 'wpseo_social', array( $this, 'load_page' ), null ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'XML Sitemaps', 'wordpress-seo' ), __( 'XML Sitemaps', 'wordpress-seo' ), 'manage_options', 'wpseo_xml', array( $this, 'load_page' ), null ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Permalinks', 'wordpress-seo' ), __( 'Permalinks', 'wordpress-seo' ), 'manage_options', 'wpseo_permalinks', array( $this, 'load_page' ), null ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Internal Links', 'wordpress-seo' ), __( 'Internal Links', 'wordpress-seo' ), 'manage_options', 'wpseo_internal-links', array( $this, 'load_page' ), null ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'RSS', 'wordpress-seo' ), __( 'RSS', 'wordpress-seo' ), 'manage_options', 'wpseo_rss', array( $this, 'load_page' ), null ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Import & Export', 'wordpress-seo' ), __( 'Import & Export', 'wordpress-seo' ), 'manage_options', 'wpseo_import', array( $this, 'load_page' ), null ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Bulk Title Editor', 'wordpress-seo' ), __( 'Bulk Title Editor', 'wordpress-seo' ), 'wpseo_bulk_edit', 'wpseo_bulk-title-editor', array( $this, 'load_page' ), array( array( $this, 'bulk_edit_options' ) ) ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Bulk Description Editor', 'wordpress-seo' ), __( 'Bulk Description Editor', 'wordpress-seo' ), 'wpseo_bulk_edit', 'wpseo_bulk-description-editor', array( $this, 'load_page' ), array( array( $this, 'bulk_edit_options' ) ) ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'Titles &amp; Metas', 'wordpress-seo' ), __( 'Titles &amp; Metas', 'wordpress-seo' ), 'manage_options', 'wpseo_titles', array( $this, 'load_page' ), array( array( $this, 'title_metas_help_tab' ) ) ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'Social', 'wordpress-seo' ), __( 'Social', 'wordpress-seo' ), 'manage_options', 'wpseo_social', array( $this, 'load_page' ), null ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'XML Sitemaps', 'wordpress-seo' ), __( 'XML Sitemaps', 'wordpress-seo' ), 'manage_options', 'wpseo_xml', array( $this, 'load_page' ), null ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'Permalinks', 'wordpress-seo' ), __( 'Permalinks', 'wordpress-seo' ), 'manage_options', 'wpseo_permalinks', array( $this, 'load_page' ), null ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'Internal Links', 'wordpress-seo' ), __( 'Internal Links', 'wordpress-seo' ), 'manage_options', 'wpseo_internal-links', array( $this, 'load_page' ), null ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'RSS', 'wordpress-seo' ), __( 'RSS', 'wordpress-seo' ), 'manage_options', 'wpseo_rss', array( $this, 'load_page' ), null ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'Import & Export', 'wordpress-seo' ), __( 'Import & Export', 'wordpress-seo' ), 'manage_options', 'wpseo_import', array( $this, 'load_page' ), null ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'Bulk Title Editor', 'wordpress-seo' ), __( 'Bulk Title Editor', 'wordpress-seo' ), 'wpseo_bulk_edit', 'wpseo_bulk-title-editor', array( $this, 'load_page' ), array( array( $this, 'bulk_edit_options' ) ) ),
+					array( 'wpseo_dashboard', __( 'SEO:', 'wordpress-seo' ) . ' ' . __( 'Bulk Description Editor', 'wordpress-seo' ), __( 'Bulk Description Editor', 'wordpress-seo' ), 'wpseo_bulk_edit', 'wpseo_bulk-description-editor', array( $this, 'load_page' ), array( array( $this, 'bulk_edit_options' ) ) ),
 			);
 
 			// Check where to add the edit files page

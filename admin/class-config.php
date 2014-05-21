@@ -67,111 +67,6 @@ if ( ! class_exists( 'WPSEO_Admin_Pages' ) ) {
 		}
 
 		/**
-		 * Generates the sidebar for admin pages.
-		 */
-		function admin_sidebar() {
-
-			// No banners in Premium
-			if ( class_exists( 'Yoast_Product_WPSEO_Premium' ) ) {
-				$license_manager = new Yoast_Plugin_License_Manager( new Yoast_Product_WPSEO_Premium() );
-				if ( $license_manager->license_is_valid() ) {
-					return;
-				}
-			}
-
-			$service_banners = array(
-				array(
-				'url' => 'https://yoast.com/hire-us/website-review/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=website-review-banner',
-				'img' => 'banner-website-review.png',
-				'alt' => 'Website Review banner'
-				)
-			);
-
-			$plugin_banners = array(
-				array(
-					'url' => 'https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=premium-seo-banner',
-					'img' => 'banner-premium-seo.png',
-					'alt' => 'Banner WordPress SEO Premium',
-				),
-			);
-
-			if ( ! class_exists( 'wpseo_Video_Sitemap' ) ) {
-				$plugin_banners[] = array(
-					'url' => 'https://yoast.com/wordpress/plugins/video-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=video-seo-banner',
-					'img' => 'banner-video-seo.png',
-					'alt' => 'Banner WordPress SEO Video SEO extension',
-				);
-			}
-
-			if ( ! class_exists( 'wpseo_Video_Manual' ) ) {
-				$plugin_banners[] = array(
-					'url' => 'https://yoast.com/wordpress/plugins/video-manual-wordpress-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=video-manual-banner',
-					'img' => 'banner-video-seo-manual.png',
-					'alt' => 'Banner WordPress SEO Video manual',
-				);
-			}
-
-			if ( class_exists( 'Woocommerce' ) && ! class_exists( 'Yoast_WooCommerce_SEO' ) ) {
-				$plugin_banners[] = array(
-					'url' => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=woocommerce-seo-banner',
-					'img' => 'banner-woocommerce-seo.png',
-					'alt' => 'Banner WooCommerce SEO plugin',
-				);
-			}
-
-			if ( ! defined( 'WPSEO_LOCAL_VERSION' ) ) {
-				$plugin_banners[] = array(
-					'url' => 'https://yoast.com/wordpress/plugins/local-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=local-seo-banner',
-					'img' => 'banner-local-seo.png',
-					'alt' => 'Banner Local SEO plugin',
-				);
-			}
-
-			if ( ! class_exists( 'WPSEO_News' ) ) {
-				$plugin_banners[] = array(
-					'url' => 'https://yoast.com/wordpress/plugins/news-seo/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=news-seo-banner',
-					'img' => 'banner-news-seo.png',
-					'alt' => 'Banner News SEO',
-				);
-			}
-
-			if ( ! class_exists( 'Post_Connector' ) ) {
-				$plugin_banners[] = array(
-					'url' => 'https://yoast.com/wordpress/plugins/post-connector/#utm_source=wordpress-seo-config&utm_medium=banner&utm_campaign=post-connector-banner',
-					'img' => 'banner-post-connector.png',
-					'alt' => 'Banner Post Connector plugin',
-				);
-			}
-
-			shuffle( $service_banners );
-			shuffle( $plugin_banners );
-			?>
-			<div class="wpseo_content_cell" id="sidebar-container">
-				<div id="sidebar">
-			<?php
-
-			$service_banner = $service_banners[0];
-
-			echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img width="261" height="190" src="' . plugins_url( 'images/' . $service_banner['img'], WPSEO_FILE ) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
-
-			$i = 0;
-			foreach ( $plugin_banners as $banner ) {
-				if ( $i == 2 )
-					break;
-				echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><img width="261" src="' . plugins_url( 'images/' . $banner['img'], WPSEO_FILE ) . '" alt="' . esc_attr( $banner['alt'] ) . '"/></a><br/><br/>';
-				$i++;
-			}
-			?>
-					<?php
-						echo __( 'Remove these ads?', 'wordpress-seo' ) . '<br/>';
-						echo '<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&utm_medium=textlink&utm_campaign=remove-ads-link">' . __('Upgrade to WordPress SEO Premium &raquo;', 'wordpress-seo') . '</a><br/><br/>';
-					?>
-				</div>
-			</div>
-		<?php
-		}
-
-		/**
 		 * Generates the header for admin pages
 		 *
 		 * @param bool   $form           Whether or not the form start tag should be included.
@@ -224,7 +119,7 @@ if ( ! class_exists( 'WPSEO_Admin_Pages' ) ) {
 			</div><!-- end of div wpseo_content_top -->';
 
 			if ( $show_sidebar ) {
-				$this->admin_sidebar();
+				//$this->admin_sidebar();
 			}
 
 			echo '</div><!-- end of div wpseo_content_wrapper -->';

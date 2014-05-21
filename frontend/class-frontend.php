@@ -505,7 +505,7 @@ if ( ! class_exists( 'WPSEO_Frontend' ) ) {
 		 * @return string
 		 */
 		public function debug_marker( $echo = true ) {
-			$marker = '<!-- This site is optimized with the Yoast WordPress SEO plugin v' . WPSEO_VERSION . ' - https://yoast.com/wordpress/plugins/seo/ -->';
+			$marker = '<!-- This site is search engine optimized (add-on v' . WPSEO_VERSION . ') -->';
 			if ( $echo === false ) {
 				return $marker;
 			} else {

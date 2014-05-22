@@ -49,7 +49,7 @@ function wpseo_auto_load( $class ) {
 			'wpseo_pointers'                     => WPSEO_PATH . 'admin/class-pointers.php',
 			'wpseo_sitemaps_admin'               => WPSEO_PATH . 'admin/class-sitemaps-admin.php',
 			'wpseo_taxonomy'                     => WPSEO_PATH . 'admin/class-taxonomy.php',
-			'yoast_tracking'                     => WPSEO_PATH . 'admin/class-tracking.php',
+			//'yoast_tracking'                     => WPSEO_PATH . 'admin/class-tracking.php',
 			'yoast_textstatistics'               => WPSEO_PATH . 'admin/TextStatistics.php',
 			'wpseo_breadcrumbs'                  => WPSEO_PATH . 'frontend/class-breadcrumbs.php',
 			'wpseo_frontend'                     => WPSEO_PATH . 'frontend/class-frontend.php',
@@ -107,7 +107,7 @@ function wpseo_activate() {
 
 	wpseo_add_capabilities();
 
-	WPSEO_Options::schedule_yoast_tracking( null, get_option( 'wpseo' ) );
+	//WPSEO_Options::schedule_yoast_tracking( null, get_option( 'wpseo' ) );
 
 	// Clear cache so the changes are obvious.
 	WPSEO_Options::clear_cache();
@@ -226,20 +226,6 @@ function wpseo_admin_init() {
 	if ( isset( $_GET['wpseo_restart_tour'] ) ) {
 		$options['ignore_tour'] = false;
 		update_option( 'wpseo', $options );
-	}
-
-	if ( $options['yoast_tracking'] === true ) {
-		/**
-		 * @internal this is not a proper lean loading implementation (method_exist will autoload the class),
-		 * but it can't be helped as there are other plugins out there which also use versions
-		 * of the Yoast Tracking class and we need to take that into account unfortunately
-		 */
-		if ( method_exists( 'Yoast_Tracking', 'get_instance' ) ) {
-			add_action( 'yoast_tracking', array( 'Yoast_Tracking', 'get_instance' ) );
-		}
-		else {
-			$GLOBALS['yoast_tracking'] = new Yoast_Tracking;
-		}
 	}
 
 	if ( in_array( $pagenow, array( 'edit.php', 'post.php', 'post-new.php' ) ) ) {

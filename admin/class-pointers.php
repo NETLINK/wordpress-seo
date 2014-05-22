@@ -35,10 +35,7 @@ if ( ! class_exists( 'WPSEO_Pointers' ) ) {
 					wp_enqueue_script( 'wp-pointer' );
 					wp_enqueue_script( 'utils' );
 				}
-				if ( $options['tracking_popup_done'] === false && ! isset( $_GET['allow_tracking'] ) ) {
-					add_action( 'admin_print_footer_scripts', array( $this, 'tracking_request' ) );
-				}
-				elseif ( $options['ignore_tour'] === false ) {
+				if ( $options['ignore_tour'] === false ) {
 					add_action( 'admin_print_footer_scripts', array( $this, 'intro_tour' ) );
 				}
 			}
@@ -56,28 +53,6 @@ if ( ! class_exists( 'WPSEO_Pointers' ) ) {
 			return self::$instance;
 		}
 
-
-		/**
-		 * Shows a popup that asks for permission to allow tracking.
-		 */
-		function tracking_request() {
-			$id    = '#wpadminbar';
-			$nonce = wp_create_nonce( 'wpseo_activate_tracking' );
-
-			$content = '<h3>' . __( 'Help improve WordPress SEO', 'wordpress-seo' ) . '</h3>';
-			$content .= '<p>' . __( 'You\'ve just installed WordPress SEO by Yoast. Please helps us improve it by allowing us to gather anonymous usage stats so we know which configurations, plugins and themes to test with.', 'wordpress-seo' ) . '</p>';
-			$opt_arr = array(
-				'content'  => $content,
-				'position' => array( 'edge' => 'top', 'align' => 'center' )
-			);
-			$button2 = __( 'Allow tracking', 'wordpress-seo' );
-
-			$function2 = 'wpseo_store_answer("yes","' . $nonce . '")';
-			$function1 = 'wpseo_store_answer("no","' . $nonce . '")';
-
-			$this->print_scripts( $id, $opt_arr, __( 'Do not allow tracking', 'wordpress-seo' ), $button2, $function2, $function1 );
-		}
-
 		/**
 		 * Load the introduction tour
 		 */
@@ -86,19 +61,10 @@ if ( ! class_exists( 'WPSEO_Pointers' ) ) {
 
 			$adminpages = array(
 				'wpseo_dashboard'      => array(
-					'content'  => '<h3>' . __( 'Dashboard', 'wordpress-seo' ) . '</h3><p>' . __( 'This is the WordPress SEO Dashboard, here you can restart this tour or revert the WP SEO settings to default.', 'wordpress-seo' ) . '</p>'
+					'content'  => '<h3>' . __( 'Dashboard', 'wordpress-seo' ) . '</h3><p>' . __( 'This is the SEO dashboard; here you can restart this tour or revert the SEO settings to default.', 'wordpress-seo' ) . '</p>'
 							. '<p><strong>' . __( 'More WordPress SEO', 'wordpress-seo' ) . '</strong><br/>' . sprintf( __( 'There\'s more to learn about WordPress &amp; SEO than just using this plugin. Read our article %1$sthe definitive guide to WordPress SEO%2$s.', 'wordpress-seo' ), '<a target="_blank" href="' . esc_url( 'https://yoast.com/articles/wordpress-seo/#utm_source=wpadmin&utm_medium=wpseo_tour&utm_term=link&utm_campaign=wpseoplugin' ) . '">', '</a>' ) . '</p>'
 							. '<p><strong>' . __( 'Webmaster Tools', 'wordpress-seo' ) . '</strong><br/>' . __( 'Underneath the General Settings, you can add the verification codes for the different Webmaster Tools programs, I highly encourage you to check out both Google and Bing\'s Webmaster Tools.', 'wordpress-seo' ) . '</p>'
-							. '<p><strong>' . __( 'About This Tour', 'wordpress-seo' ) . '</strong><br/>' . __( 'Clicking Next below takes you to the next page of the tour. If you want to stop this tour, click "Close".', 'wordpress-seo' ) . '</p>'
-							. '<p><strong>' . __( 'Like this plugin?', 'wordpress-seo' ) . '</strong><br/>' . sprintf( __( 'If you like this plugin, please %srate it 5 stars on WordPress.org%s and consider making a donation by clicking the button on the right!', 'wordpress-seo' ), '<a target="_blank" href="https://wordpress.org/plugins/wordpress-seo/">', '</a>' ) . '</p>' .
-							'<p><strong>' . __( 'Newsletter', 'wordpress-seo' ) . '</strong><br/>' .
-							__( 'If you would like to keep up to date regarding the WordPress SEO plugin and other plugins by Yoast, subscribe to the newsletter:', 'wordpress-seo' ) . '</p>' .
-							'<form action="http://yoast.us1.list-manage1.com/subscribe/post?u=ffa93edfe21752c921f860358&amp;id=972f1c9122" method="post" id="newsletter-form" accept-charset="' . esc_attr( get_bloginfo( 'charset' ) ) . '">' .
-							'<p>' .
-							'<label for="newsletter-email">' . __( 'Email', 'wordpress-seo' ) . ':</label><input style="color:#666" name="EMAIL" value="' . esc_attr( $current_user->user_email ) . '" id="newsletter-email" placeholder="' . __( 'Email', 'wordpress-seo' ) . '"/><br/>' .
-							'<input type="hidden" name="group" value="2"/>' .
-							'<button type="submit" class="button-primary">' . __( 'Subscribe', 'wordpress-seo' ) . '</button>' .
-							'</p></form>',
+							. '<p><strong>' . __( 'About This Tour', 'wordpress-seo' ) . '</strong><br/>' . __( 'Clicking Next below takes you to the next page of the tour. If you want to stop this tour, click "Close".', 'wordpress-seo' ) . '</p>',
 					'button2'  => __( 'Next', 'wordpress-seo' ),
 					'function' => 'window.location="' . admin_url( 'admin.php?page=wpseo_titles' ) . '";',
 				),
